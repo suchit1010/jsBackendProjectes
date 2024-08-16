@@ -2,7 +2,7 @@
 
 ---
 
-# URL Shortener Documentation
+# URL Shortener
 
 ## Overview
 A simple URL shortener service that takes in a valid URL and returns a shortened URL. The service also redirects the user to the original URL when they visit the shortened link and keeps track of the total visits/clicks.
