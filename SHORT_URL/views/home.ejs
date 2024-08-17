@@ -5,6 +5,111 @@
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 20px;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f8f8;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            form {
+                padding: 0 10px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            tr td:first-child {
+                font-weight: bold;
+            }
         }
     </style>
     <meta charset="UTF-8">
@@ -12,7 +117,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1>URL shortener</h1>
+    <h1>URL Shortener</h1>
 
     <!-- Display the generated short URL if it exists -->
     <% if (typeof id !== 'undefined') { %>
@@ -21,8 +126,8 @@
 
     <div>
         <form method="post" action="/url">
-            <label for="">Enter Your Original URL</label>
-            <input type="text" name="url" placeholder="https://example.com" />
+            <label for="url">Enter Your Original URL</label>
+            <input type="text" name="url" id="url" placeholder="https://example.com" />
             <button type="submit">Generate</button>
         </form>
     </div>
@@ -32,7 +137,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>NO</th>
+                        <th>No</th>
                         <th>ShortID</th>
                         <th>Redirect</th>
                         <th>Clicks</th>
