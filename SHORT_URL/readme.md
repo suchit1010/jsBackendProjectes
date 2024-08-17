@@ -19,7 +19,7 @@ A simple URL shortener service that takes in a valid URL and returns a shortened
 
 Generates a new short URL and returns the shortened URL in the format `example.com/random-id`.
 
-### 2. Redirect to Original URL
+### 2. Redirect to the Original URL
 **GET /:shortId**
 
 Redirects the user to the original URL associated with the given `shortId`.
