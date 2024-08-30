@@ -14,5 +14,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/signup", async (req, res) => {
+    try {
+        return res.render("signup");
+        
+    } catch (error) {
+        console.error("Error fetching signUp:", error);
+        return res.status(500).send("An error occurred while fetching Users.");
+    }
+});
+
+
 module.exports = router;
 
