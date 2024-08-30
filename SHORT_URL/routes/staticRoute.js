@@ -4,15 +4,17 @@ const URL = require('../models/url'); // Ensure the path to the model is correct
 
 router.get("/", async (req, res) => {
     try {
-        const allUrls = await URL.find(); // Fetch all URLs from the database
+        const allUrls = await URL.find();
+        console.log("Fetched URLs:", allUrls);
         return res.render("home", {
-            urls: allUrls, // Pass the URLs to the template
+            urls: allUrls,
         });
     } catch (error) {
         console.error("Error fetching URLs:", error);
         return res.status(500).send("An error occurred while fetching URLs.");
     }
 });
+
 
 router.get("/signup", async (req, res) => {
     try {
