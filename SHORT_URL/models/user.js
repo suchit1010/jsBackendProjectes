@@ -9,11 +9,16 @@ const userSchema = new mongoose.Schema({
     email: {
        type: String,
        require: true,
-    //    unique: true
+       unique: true
     },
     password: {
         type:String,
         require:true
+    },
+    visitHistory: [{ timestamps: {type: Number}}],
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
     },
 }, 
 { timestamps: true });

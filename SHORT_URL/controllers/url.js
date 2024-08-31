@@ -10,7 +10,8 @@ async function handleGenerateNewShortURL(req, res) {
     const result = await URL.create({
         shortId: shortID,
         redirectURL: body.url,
-        visitHistory: [], 
+        visitHistory: [],
+        createdBy: req.user._id,
     });
     
     // Fetch all URLs to pass to the template
@@ -28,8 +29,8 @@ async function handlegetAnalitcs(req, res) {
     const result = await URL.findOne({ shortId });
 
     return res.json({
-        totalClicks: result.visitHistory.length,
-        analytics: result.visitHistory,
+        totalClicks: result ? result.visitHistory.length : 0,
+        analytics: result ? result.visitHistory : [],
     });
 }
 
@@ -37,3 +38,4 @@ module.exports = {
     handleGenerateNewShortURL,
     handlegetAnalitcs
 };
+

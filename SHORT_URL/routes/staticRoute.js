@@ -4,8 +4,9 @@ const URL = require('../models/url'); // Ensure the path to the model is correct
 
 router.get("/", async (req, res) => {
     try {
-        const allUrls = await URL.find();
-        console.log("Fetched URLs:", allUrls);
+        if(!req.user) return res.redirect("/login")
+        const allUrls = await URL.find({ createdBy: req.user._id});
+        // console.log("Fetched URLs:", allUrls);
         return res.render("home", {
             urls: allUrls,
         });

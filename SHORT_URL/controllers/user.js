@@ -1,5 +1,6 @@
 const User = require("../models/user");
-const URL = require("../models/url");
+const {v4: uuidv4} = require('uuid');
+const {setUser} = require("../service/auth");
 
 async function handleUserSignup(req, res) {
   // Destructure the request body to get the name, email, and password fields
@@ -14,13 +15,12 @@ async function handleUserSignup(req, res) {
 
   // Fetch all URLs from the database.
   // This is necessary because the home.ejs view expects a list of URLs to display.
-  const allUrls = await URL.find();
 
   // Render the home.ejs view and pass the fetched URLs.
   // This ensures that the home page will display the URLs after the user signs up.
-  return res.render("home", {
-    urls: allUrls,
-  });
+
+
+  return res.redirect("/");
 }
 
 async function handleUserLogin(req, res) {
@@ -32,6 +32,10 @@ async function handleUserLogin(req, res) {
       error: "invalid UserName or Password",
     });
 
+
+  const sessionId = uuidv4();
+  setUser(sessionId, user);
+  res.cookie("uid", sessionId);
   return res.redirect("/");
 }
 
