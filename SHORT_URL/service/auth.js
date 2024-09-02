@@ -3,13 +3,17 @@ const secret = "Shre@1010";
 
 function setUser(user) {
     return jwt.sign(
-        {
-            _id: user._id,
-            email: user.email,
-        },
-        secret // Optional: Set token to expire in 1 hour
+      {
+        _id: user._id,
+        email: user.email,
+        role: user.roles, // Ensure it's a single string
+      },
+      secret,
+      { expiresIn: '1h' }
     );
 }
+
+  
 
 function getUser(token) {
     if (!token) return null;
