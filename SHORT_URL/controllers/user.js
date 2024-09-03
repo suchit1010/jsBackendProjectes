@@ -29,7 +29,7 @@ async function handleUserLogin(req, res) {
 
   const token = setUser(user);  // Generate a new token with the correct role
   res.cookie("token", token);
-  console.log("Logged in user role:", user.role);
+  // console.log("Logged in user role:", user.role);
   return res.redirect("/");
 }
 
