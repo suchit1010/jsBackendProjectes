@@ -1,35 +1,38 @@
 const { getUser } = require("../service/auth");
 
 function checkAuthentication(req, res, next) {
-    const tokenCookie = req.cookies?.token;
-    req.user = null;
-  
-    if (!tokenCookie) {
-      return next(); // If no token is present, continue without authentication
-    }
-  
-    try {
-      const user = getUser(tokenCookie); // Extract the user from the token
-      req.user = user; // Attach the user object to the request
-    } catch (error) {
-      console.error("Token verification failed:", error);
-      return res.redirect("/login"); // Redirect to login if token is invalid
-    }
-  
-    return next();
+  const tokenCookie = req.cookies?.token; // Corrected to 'req.headers' and 'authorization'
+  req.user = null;
+
+  if (!tokenCookie) {
+    // console.log("No token found, redirecting to login.");
+    return res.redirect("/login");
   }
+
+  const user = getUser(tokenCookie); // Extract user details from the token
+
+  if (!user) {
+    // console.log("Invalid token, redirecting to login.");
+    return res.redirect("/login");
+  }
+
+  req.user = user; // Attach the user object to the request
+  // console.log("Authenticated user:", user); // Debugging: check what user object looks like
+  next();
+}
+
+  
 
   function restrictTo(roles = []) {
     return function(req, res, next) {
-    //   console.log("User roles:", req.user.role);
+      // console.log("User roles:", req.user?.role); // Debugging
   
       if (!req.user) {
         // console.log("No user found, redirecting to login");
         return res.redirect("/login");
       }
   
-      // Directly check against the string role
-      if (!roles.includes(req.user.role)) {
+      if (!roles.includes(req.user.role)) { // Check user role
         // console.log("User not authorized:", req.user.role);
         return res.status(403).end("Unauthorized");
       }
@@ -37,6 +40,7 @@ function checkAuthentication(req, res, next) {
       return next();
     };
   }
+  
   
   
   
