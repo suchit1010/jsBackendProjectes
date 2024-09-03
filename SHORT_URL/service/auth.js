@@ -9,7 +9,6 @@ function setUser(user) {
         role: user.roles, // Ensure it's a single string
       },
       secret,
-      { expiresIn: '1h' }
     );
 }
 
